@@ -4,13 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/dashboard.css') }}">
 </head>
 <body>
-    <section class="titleSection">
-        <h1>Livestock Management</h1>
 
-        <h2>Dashboard</h2>
+    <div class="titleSection">
+        <h1>Dashboard</h1>
+    </div>
+
+    <section class="dashboard">
+        <div class="card">
+            <h2>Total Herd</h2>
+            <p>{{ total_herd }}</p>
+        </div>
+
+        <div class="card" id="cardAnimalsRequiringAttention">
+            <h2>Animals Requiring Attention</h2>
+            <p>{{ animals_requiring_attention }}</p>
+            <ul id="animalsRequiringAttentionList" style="display: none;">
+
+                {% for id in animals_requiring_attention_id %}
+                    <li><p>{{ id }}</p></li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Missing Health Updates</h2>
+            <p>{{ missing_health_updates }}</p>
+        </div>
+
+        <div class="card">
+            <h2>Recent Alerts</h2>
+            <p>{{ recent_alerts }}</p>
+        </div>
     </section>
 </body>
 </html>
+
+<script src="/static/js/dashboard.js"></script>

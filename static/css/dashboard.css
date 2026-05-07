@@ -1,3 +1,16 @@
 .titleSection{
     text-align: center;
 }
+
+.dashboard{
+    text-align: center;
+}
+
+.card {
+    border: 10px black;
+    border-radius: 10px;
+}
+
+#cardAnimalsRequiringAttention:hover{
+    color: blue;
+}
