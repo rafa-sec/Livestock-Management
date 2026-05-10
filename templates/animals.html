@@ -3,9 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Animals Management</title>
 </head>
 <body>
+
+    <section>
+        <h2>Animals</h2>
+        <table>
+            <tr>
+                <th>Tag</th>
+                <th>Race</th>
+                <th>Sex</th>
+                <th>Birth day</th>
+                <th>Weight</th>
+            </tr>
+
+            {% for animal in animals_list %}
+            <tr>
+                <th>{{ animal['tag'] }}</th>
+                <th>{{ animal['race'] }}</th>
+                <th>{{ animal['sex'] }}</th>
+                <th>{{ animal['birth_day'] }}</th>
+                <th>{{ animal['weight'] }}</th>
+            </tr>
+
+            {% endfor %}
+        </table>
+    </section>
     
 </body>
 </html>

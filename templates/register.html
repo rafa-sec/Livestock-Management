@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animals Register</title>
+</head>
+<body>
+
+
+    <section>
+        <h2>Add animals</h2>
+        <form action="/register" method="post">
+        <input type="text" placeholder="Tag" name="input_tag" required>
+        <input type="text" placeholder="Race" name="input_race" id="">
+        <input type="text" placeholder="Sex (M or F)"  name="input_sex" id="">
+        <input type="date" placeholder="Birth Day" name="input_birthday" id="">
+        <input type="number" placeholder="Weight" name="input_weight" id="">
+        <button type="submit">Submit</button>
+        </form>
+    </section>
+
+    <section>
+        <h2>Animals</h2>
+        <table>
+            <tr>
+                <th>Tag</th>
+                <th>Race</th>
+                <th>Sex</th>
+                <th>Birth day</th>
+                <th>Weight</th>
+            </tr>
+        </table>
+    </section>
+    
+</body>
+</html>

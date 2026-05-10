@@ -7,8 +7,9 @@ loginBtn.addEventListener("click", function(){
 
     if(password === "admin" && username === "admin"){
         alert("Admin logged")
-        window.location = "dashboard.html"
+        window.location = "dashboard"
     }else if(password === "worker" && username === "worker"){
         alert("Worker logged")
+        window.location = "dashboard"
     }
 })
