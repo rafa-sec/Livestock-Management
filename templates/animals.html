@@ -25,6 +25,12 @@
                 <th>{{ animal['sex'] }}</th>
                 <th>{{ animal['birth_day'] }}</th>
                 <th>{{ animal['weight'] }}</th>
+                <th>
+                    <form action="/delete" method="post">
+                        <input type="hidden" name="animal_id" value="{{ animal['id'] }}">
+                        <button type="submit" onclick="confirm('Do you really want to delete this animal from the database?')">X - Excluir</button>
+                    </form>
+                </th>
             </tr>
 
             {% endfor %}

@@ -38,6 +38,12 @@ def animals():
     all_animals = database.search_all()
     return render_template("animals.html", animals_list=all_animals)
 
+@app.route("/delete", methods=["POST"])
+def delete():
+    delete_id = request.form.get("animal_id")
+    if delete_id:
+        database.delete_animal(int(delete_id)) # SQLite can't receive an string. To make sure I convert everytime here.
+    return redirect("/animals")
 
 if __name__ == "__main__":
     app.run(debug=True)

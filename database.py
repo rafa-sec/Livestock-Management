@@ -38,6 +38,15 @@ def new_animal(tag, race, sex, birth_day, weight):
     finally:
          conn.close()
 
+
+def delete_animal(animal_id):
+    conn = database_connect()
+    try:
+        conn.execute("DELETE FROM cattle WHERE id = ?", (animal_id,))
+        conn.commit()
+    finally:
+        conn.close()
+
 def search_all():
     conn = database_connect()
     data = conn.execute("SELECT * FROM cattle").fetchall()
