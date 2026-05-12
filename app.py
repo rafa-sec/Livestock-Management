@@ -60,7 +60,7 @@ def delete():
 def edit():
     if request.method == "POST":
         edit_id = request.form.get("animal_id")
-        edit_weight = request.form.get("weight")
+        edit_weight = float(request.form.get("weight"))
         if edit_id:
             database.edit_animal(int(edit_id), edit_weight)
     return redirect("/animals")
