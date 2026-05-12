@@ -7,47 +7,33 @@
 body{
     display: grid;
     grid-template-columns: 200px 1fr;
+    grid-template-rows: 80px 1fr;
     grid-template-areas: 
-        "header header"
+        "sidebar header"
         "sidebar main";
     min-height: 100vh;
     
 }
 
-
-.dashboard{
-    grid-area: main;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 20px;
-    align-content: flex-start;
-    justify-content: center;
-}
-
-.card {
+.titleSection{
+    grid-area: header;
     text-align: center;
-    border: 1px solid black;
-    border-radius: 10px;
-    flex: 1 1 250px;
-    margin: 10px auto;
-    padding: 10px;
-    max-width: 400px;
-    font-family:Arial, Helvetica, sans-serif
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid black;
 }
 
-.card h2{
-    font-size: 20px;
-}
-
-#cardAnimalsRequiringAttention:hover{
-    color: blue;
+.titleSection h1{
+    color: rgb(0, 0, 0);
 }
 
 
 .sideMenu{
-    grid-area: sidebar main;
+    grid-area: sidebar;
     background-color: rgb(143, 101, 45);
+    padding: 20px;
+    z-index: 10;
 }
 
 .sideMenu a{

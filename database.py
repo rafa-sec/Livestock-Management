@@ -52,3 +52,15 @@ def search_all():
     data = conn.execute("SELECT * FROM cattle").fetchall()
     conn.close()
     return data
+
+
+
+
+### GET INFO
+def get_animal_count():
+    conn = database_connect()
+    data = conn.execute("SELECT COUNT(*) FROM cattle")
+    count = data.fetchone()[0]
+    conn.close()
+
+    return count

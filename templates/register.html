@@ -4,10 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Animals Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/menu.css') }}">
 </head>
 <body>
 
+    <div class="titleSection">
+        <h1>Register</h1>
+    </div>
 
+    <section class="sideMenu">
+        <div>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/animals">Animals</a>
+            <a href="/register">Register</a>
+        </div>
+    </section>
     <section>
         <h2>Add animals</h2>
         <form action="/register" method="post">
@@ -18,19 +29,6 @@
         <input type="number" placeholder="Weight" name="input_weight" id="">
         <button type="submit">Submit</button>
         </form>
-    </section>
-
-    <section>
-        <h2>Animals</h2>
-        <table>
-            <tr>
-                <th>Tag</th>
-                <th>Race</th>
-                <th>Sex</th>
-                <th>Birth day</th>
-                <th>Weight</th>
-            </tr>
-        </table>
     </section>
     
 </body>

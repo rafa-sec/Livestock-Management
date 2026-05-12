@@ -4,11 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Animals Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/menu.css') }}">
 </head>
 <body>
 
+    <div class="titleSection">
+        <h1>Animals</h1>
+    </div>
+
+    <section class="sideMenu">
+        <div>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/animals">Animals</a>
+            <a href="/register">Register</a>
+        </div>
+    </section>
+
     <section>
-        <h2>Animals</h2>
+
+
         <table>
             <tr>
                 <th>Tag</th>

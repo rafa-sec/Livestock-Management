@@ -11,7 +11,7 @@ def home():
 
 @app.route('/dashboard')
 def dashboard():
-    total_herd = 10
+    total_herd = database.get_animal_count()
     animals_requiring_attention = 3
     animals_requiring_attention_id = ["Moose","Flanagan","Piper"]
     missing_health_updates = 2
