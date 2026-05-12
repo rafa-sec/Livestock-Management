@@ -4,16 +4,9 @@
     box-sizing: border-box;
 }
 
-body{
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    grid-template-areas: 
-        "header header"
-        "sidebar main";
-    min-height: 100vh;
-    
+.titleSection h2{
+    margin-left: 20px;
 }
-
 
 .dashboard{
     grid-area: main;
@@ -44,45 +37,3 @@ body{
     color: blue;
 }
 
-
-.sideMenu{
-    grid-area: sidebar main;
-    background-color: rgb(143, 101, 45);
-}
-
-.sideMenu a{
-    color: white;
-    text-decoration: none;
-    display: block;
-    padding: 10px;
-    margin-bottom: 5px;
-    transition: background 0.3s;
-}
-
-.sideMenu a:hover{
-    color: rgb(196, 196, 196);
-    transition: color 0.2s ease 0.2s;
-}
-
-
-/* RESPONSIVE DESIGN */
-@media (max-width: 768px) {
-    body {
-        /* On mobile, stack them vertically */
-        grid-template-columns: 1fr;
-        grid-template-areas: 
-            "header"
-            "sidebar"
-            "main";
-    }
-
-    .sideMenu {
-        display: flex;
-        justify-content: space-around;
-        padding: 10px;
-    }
-
-    .sideMenu a {
-        margin-bottom: 0;
-    }
-}

@@ -26,6 +26,7 @@
         <table>
             <tr>
                 <th>Tag</th>
+                <th>Arrival Day</th>
                 <th>Race</th>
                 <th>Sex</th>
                 <th>Birth day</th>
@@ -35,6 +36,7 @@
             {% for animal in animals_list %}
             <tr>
                 <th>{{ animal['tag'] }}</th>
+                <th>{{ animal['arrival_day'] }}</th>
                 <th>{{ animal['race'] }}</th>
                 <th>{{ animal['sex'] }}</th>
                 <th>{{ animal['birth_day'] }}</th>
@@ -43,6 +45,10 @@
                     <form action="/delete" method="post">
                         <input type="hidden" name="animal_id" value="{{ animal['id'] }}">
                         <button type="submit" onclick="confirm('Do you really want to delete this animal from the database?')">X - Excluir</button>
+                    </form>
+
+                    <form action="">
+                        <button>Edit</button>
                     </form>
                 </th>
             </tr>

@@ -1,4 +1,13 @@
 import sqlite3
+from datetime import datetime
+
+#Get time
+def get_time():
+    time = datetime.now()
+    date = time.strftime("%m/%d/%Y")
+
+    return date
+
 
 def database_connect():
     conn = sqlite3.connect("data.db", timeout=10) #Connects to the database file
@@ -12,6 +21,7 @@ def initialize_database():
     conn.execute("""
         CREATE TABLE IF NOT EXISTS cattle (
             id INTEGER PRIMARY KEY AUTOINCREMENT, -- ID of the animal,
+            arrival_day DATE, -- day which the animal came to the ranch
             tag TEXT UNIQUE, -- physical identification of the animal
             race TEXT, -- Race, ex: Angus, Nelore
             sex TEXT CHECK(sex IN('M', 'F')), -- Only M(for males) or F(for females)
@@ -25,13 +35,13 @@ def initialize_database():
     conn.commit()
     conn.close()
 
-def new_animal(tag, race, sex, birth_day, weight):
+def new_animal(tag, arrival_day ,race, sex, birth_day, weight):
     conn = database_connect()
     try:
-        conn.execute("""
-                INSERT INTO cattle (tag, race, sex, birth_day, weight) 
-                VALUES (?, ?, ?, ?, ?)
-            """, (tag, race, sex, birth_day, weight))
+        conn.execute(f"""
+                INSERT INTO cattle (tag, arrival_day ,race, sex, birth_day, weight) 
+                VALUES (?, ?, ?, ?, ?, ?)
+            """, (tag, arrival_day, race, sex, birth_day, weight))
         conn.commit()  # Salva as alterações
     except Exception as e:
         print(f"Erro ao inserir: {e}")
