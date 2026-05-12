@@ -56,5 +56,14 @@ def delete():
         database.delete_animal(int(delete_id)) # SQLite can't receive an string. To make sure I convert everytime here.
     return redirect("/animals")
 
+@app.route("/edit", methods=["GET","POST"])
+def edit():
+    if request.method == "POST":
+        edit_id = request.form.get("animal_id")
+        edit_weight = request.form.get("weight")
+        if edit_id:
+            database.edit_animal(int(edit_id), edit_weight)
+    return redirect("/animals")
+
 if __name__ == "__main__":
     app.run(debug=True)

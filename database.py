@@ -35,6 +35,9 @@ def initialize_database():
     conn.commit()
     conn.close()
 
+
+#CREATE INFO
+
 def new_animal(tag, arrival_day ,race, sex, birth_day, weight):
     conn = database_connect()
     try:
@@ -44,7 +47,7 @@ def new_animal(tag, arrival_day ,race, sex, birth_day, weight):
             """, (tag, arrival_day, race, sex, birth_day, weight))
         conn.commit()  # Salva as alterações
     except Exception as e:
-        print(f"Erro ao inserir: {e}")
+        print(f"Error when adding: {e}")
     finally:
          conn.close()
 
@@ -56,6 +59,25 @@ def delete_animal(animal_id):
         conn.commit()
     finally:
         conn.close()
+
+
+def edit_animal(animal_id, weight):
+    conn = database_connect()
+    try:
+        conn.execute("""
+        UPDATE cattle
+        SET weight = ?
+        WHERE id = ?
+        """,
+        (weight, animal_id,))
+
+        conn.commit()
+        
+    except Exception as e:
+        print(f"Error when adding: {e}")
+    finally:
+        conn.close()
+
 
 def search_all():
     conn = database_connect()

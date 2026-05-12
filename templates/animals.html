@@ -48,8 +48,13 @@
                         <button type="submit" onclick="confirm('Do you really want to delete this animal from the database?')">X - Excluir</button>
                     </form>
 
-                    <form action="">
-                        <button>Edit</button>
+                    <button class="editBtn">Edit</button>
+
+
+                    <form class="editForm" style="display: none;" action="/edit" method="post">
+                        <input type="hidden" name="animal_id" value="{{ animal['id'] }}">
+                        <input type="number" name="weight" placeholder="New weight">
+                        <button type="submit">Confirm</button>
                     </form>
                 </th>
             </tr>
@@ -60,3 +65,5 @@
     
 </body>
 </html>
+
+<script src="{{ url_for('static', filename='js/animals.js') }}"></script>
