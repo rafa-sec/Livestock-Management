@@ -1,6 +1,12 @@
 from flask import Flask, render_template, request, redirect
 from datetime import datetime
 import database
+def get_todayDate():
+    time = datetime.now()
+    date = time.strftime("%m/%d/%Y")
+
+    return date
+
 
 app = Flask(__name__)
 
@@ -12,8 +18,7 @@ def home():
 
 @app.route('/dashboard')
 def dashboard():
-    time = datetime.now()
-    date = time.strftime("%m/%d/%Y")
+    date = get_todayDate()
     total_herd = database.get_animal_count()
     animals_requiring_attention = 3
     animals_requiring_attention_id = ["Moose","Flanagan","Piper"]
@@ -23,6 +28,7 @@ def dashboard():
 
 @app.route("/register", methods=["GET","POST"])
 def register():
+    date = get_todayDate()
     if request.method == "POST":
         date = database.get_time()
         tag = request.form.get("input_tag")
@@ -35,12 +41,13 @@ def register():
         database.new_animal(tag, date, race, sex, birth_day, weight)
         return redirect("/animals")
     
-    return render_template("register.html")
+    return render_template("register.html", date=date)
 
 @app.route("/animals")
 def animals():
+    date = get_todayDate()
     all_animals = database.search_all()
-    return render_template("animals.html", animals_list=all_animals)
+    return render_template("animals.html", animals_list=all_animals, date=date)
 
 @app.route("/delete", methods=["POST"])
 def delete():

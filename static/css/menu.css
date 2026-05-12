@@ -28,6 +28,10 @@ body{
     color: rgb(0, 0, 0);
 }
 
+.titleSection h2{
+    margin-left: 20px;
+}
+
 
 .sideMenu{
     grid-area: sidebar;

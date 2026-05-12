@@ -4,10 +4,6 @@
     box-sizing: border-box;
 }
 
-.titleSection h2{
-    margin-left: 20px;
-}
-
 .dashboard{
     grid-area: main;
     display: flex;
