@@ -30,15 +30,15 @@ def dashboard():
 def register():
     date = get_todayDate()
     if request.method == "POST":
-        date = database.get_time()
+        arrival_day = database.get_time()
         tag = request.form.get("input_tag")
         race = request.form.get("input_race")
         sex = request.form.get("input_sex")
         birth_day = request.form.get("input_birthday")
         weight = request.form.get("input_weight")
 
-        print(f"DEBUG -> Tag: {tag}, Raça: {race}")
-        database.new_animal(tag, date, race, sex, birth_day, weight)
+        print(f"DEBUG -> Tag: {tag}, Race: {race}, Weight: {weight} ")
+        database.new_animal(tag, arrival_day, race, sex, birth_day, weight)
         return redirect("/animals")
     
     return render_template("register.html", date=date)
@@ -59,10 +59,10 @@ def delete():
 @app.route("/edit", methods=["GET","POST"])
 def edit():
     if request.method == "POST":
-        edit_id = request.form.get("animal_id")
-        edit_weight = float(request.form.get("weight"))
-        if edit_id:
-            database.edit_animal(int(edit_id), edit_weight)
+        cattle_id = request.form.get("animal_id")
+        new_weight = float(request.form.get("weight"))
+        if cattle_id:
+            database.add_weight(int(cattle_id), new_weight)
     return redirect("/animals")
 
 if __name__ == "__main__":
