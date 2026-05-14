@@ -34,7 +34,8 @@
                 <th>Weight</th>
             </tr>
 
-            {% for animal in animals_list %}
+            {% for animal in animal_list %}
+
             <tr>
                 <th>{{ animal['tag'] }}</th>
                 <th>{{ animal['arrival_day'] }}</th>
@@ -58,7 +59,6 @@
                     </form>
                 </th>
             </tr>
-
             {% endfor %}
         </table>
     </section>

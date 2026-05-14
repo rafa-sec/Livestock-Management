@@ -134,9 +134,22 @@ def add_weight(cattle_id, new_weight):
 
 def search_all():
     conn = database_connect()
-    data = conn.execute("SELECT * FROM cattle").fetchall()
+    animal_data = conn.execute("""
+        SELECT
+            cattle.id,
+            cattle.tag,
+            cattle.arrival_day,
+            cattle.race,
+            cattle.sex,
+            cattle.birth_day,
+            weights.weight
+        FROM cattle
+        LEFT JOIN weights
+            ON cattle.id = weights.cattle_id
+        GROUP BY cattle.id
+    """).fetchall()
     conn.close()
-    return data
+    return animal_data
 
 
 

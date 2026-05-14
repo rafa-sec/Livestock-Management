@@ -46,8 +46,14 @@ def register():
 @app.route("/animals")
 def animals():
     date = get_todayDate()
-    all_animals = database.search_all()
-    return render_template("animals.html", animals_list=all_animals, date=date)
+    animal_data = database.search_all()
+
+    return render_template(
+        "animals.html",
+        animal_list=animal_data,
+        date=date
+    )
+
 
 @app.route("/delete", methods=["POST"])
 def delete():
@@ -60,8 +66,9 @@ def delete():
 def edit():
     if request.method == "POST":
         cattle_id = request.form.get("animal_id")
-        new_weight = float(request.form.get("weight"))
-        if cattle_id:
+        new_weight = request.form.get("weight")
+        if cattle_id and new_weight:
+            new_weight = float(new_weight)
             database.add_weight(int(cattle_id), new_weight)
     return redirect("/animals")
 
