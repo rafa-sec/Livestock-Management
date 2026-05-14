@@ -1,17 +1,49 @@
-const editBtn = document.querySelector(".editBtn")
-const editForm = document.querySelector(".editForm");
+const editBtn = document.querySelectorAll(".editBtn")
 const editConfirmBtn = document.querySelector(".editConfirmBtn");
 
-const deleteConfirmBtn = document.querySelector(".deleteConfirmBtn");
+const deleteButtons = document.querySelectorAll(".deleteConfirmBtn");
+
 
 editConfirmBtn.addEventListener("click", function(){
-    confirm("Do you really want to edit it?")
+    const confirmed = confirm("Do you really want to edit it?");
+
+    if (!confirmed) {
+        event.preventDefault();
+    }
 })
 
-editBtn.addEventListener("click", function (){
-    editForm.style.display = "block"
+
+editBtn.forEach(button => {
+
+    button.addEventListener("click", function (){
+        const row = button.closest("tr");
+
+        const form = row.querySelector(".editForm");
+        if(form.style.display === "none" || form.style.display === ""){
+
+                form.style.display = "block"
+
+        }else{
+
+            form.style.display = "none"
+
+        }
+
+    })
+
 })
 
-deleteConfirmBtn.addEventListener("click", function (){
-    confirm("Do you really want to delete this animal?")
-})
+
+deleteButtons.forEach(button => {
+
+    button.addEventListener("click", function (event) {
+
+        const confirmed = confirm("Do you really want to delete this animal?");
+
+        if (!confirmed) {
+            event.preventDefault();
+        }
+
+    });
+
+});

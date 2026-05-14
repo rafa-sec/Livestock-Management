@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Animals Management</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='/css/menu.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/animals.css') }}">
 </head>
 <body>
 
@@ -26,24 +27,30 @@
 
         <table>
             <tr>
-                <th>Tag</th>
-                <th>Arrival Day</th>
-                <th>Race</th>
-                <th>Sex</th>
-                <th>Birth day</th>
-                <th>Weight</th>
+                <td>Tag</td>
+                <td>Arrival Day</td>
+                <td>Race</td>
+                <td>Sex</td>
+                <td>Birth day</td>
+                <td>Weight</td>
+                <td>Status</td>
             </tr>
 
             {% for animal in animal_list %}
 
             <tr>
-                <th>{{ animal['tag'] }}</th>
-                <th>{{ animal['arrival_day'] }}</th>
-                <th>{{ animal['race'] }}</th>
-                <th>{{ animal['sex'] }}</th>
-                <th>{{ animal['birth_day'] }}</th>
-                <th>{{ animal['weight'] }}</th>
-                <th>
+                <td>{{ animal['tag'] }}</td>
+                <td>{{ animal['arrival_day'] }}</td>
+                <td>{{ animal['race'] }}</td>
+                <td>{{ animal['sex'] }}</td>
+                <td>{{ animal['birth_day'] }}</td>
+                <td>{{ animal['weight'] }}</td>
+                <td>
+                    <span class="status {{ animal['health_status'] }}">
+                        {{ animal['health_status'].capitalize() }}
+                    </span>
+                </td>
+                <td>
                     <form action="/delete" method="post">
                         <input type="hidden" name="animal_id" value="{{ animal['id'] }}">
                         <button class="deleteConfirmBtn" type="submit">X - Excluir</button>
@@ -54,10 +61,10 @@
 
                     <form class="editForm" style="display: none;" action="/edit" method="post">
                         <input type="hidden" name="animal_id" value="{{ animal['id'] }}">
-                        <input type="number" name="weight" placeholder="New weight">
+                        <input type="number" name="weight" step="0.01" placeholder="New weight">
                         <button class="editConfirmBtn" type="submit">Confirm</button>
                     </form>
-                </th>
+                </td>
             </tr>
             {% endfor %}
         </table>

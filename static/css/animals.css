@@ -1,0 +1,17 @@
+.status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    color: white;
+}
+
+.healthy {
+    background-color: #3f7d4e;
+}
+
+.attention {
+    background-color: #f0ad4e;
+}
+
+.critical {
+    background-color: #d9534f;
+}

@@ -76,7 +76,7 @@ def new_animal(tag, arrival_day, race, sex, birth_day, weight):
                 """, (cattle_id, weight, get_time()))
 
 
-        conn.commit()  # Salva as alterações
+        conn.commit()
     except Exception as e:
         print(f"Error when adding: {e}")
     finally:
@@ -142,14 +142,32 @@ def search_all():
             cattle.race,
             cattle.sex,
             cattle.birth_day,
-            weights.weight
+            weights.weight,
+            weights.weigh_day
         FROM cattle
+
         LEFT JOIN weights
-            ON cattle.id = weights.cattle_id
-        GROUP BY cattle.id
+        ON weights.id = (
+            SELECT id
+            FROM weights w2
+            WHERE w2.cattle_id = cattle.id
+            ORDER BY w2.id DESC
+            LIMIT 1
+        )
     """).fetchall()
     conn.close()
-    return animal_data
+    animals = []
+
+    #Adds healthy status inside the animal without creating a new row into the database
+    for animal in animal_data:
+
+        animal_dict = dict(animal) #Turns sqlite3.Row into a normal Python dictionary
+
+        animal_dict["health_status"] = get_animal_status(animal["id"])
+
+        animals.append(animal_dict) #Stores the upgraded animal inside a new list.
+
+    return animals
 
 
 
@@ -162,3 +180,70 @@ def get_animal_count():
     conn.close()
 
     return count    
+
+### CATTLE ANALYSIS
+    
+def get_animal_status(cattle_id):
+    conn = database_connect()
+
+    weights = conn.execute("""
+        SELECT weight, weigh_day
+        FROM weights
+        WHERE cattle_id = ?
+        ORDER BY id DESC
+        LIMIT 2
+    """, (cattle_id,)).fetchall()
+
+    conn.close()
+
+    if len(weights) < 2:
+        return "Lack of info to return status"
+    
+    newest = weights[0] #Select the first row (the newest weight row)
+    older = weights[1] #Select the second row (the oldest weight row)
+
+    new_weight = newest["weight"] #Select the "weight" column from the newest row
+    old_weight = older["weight"] #Select the "weight" column from the oldest row
+
+    new_date = datetime.strptime(newest["weigh_day"], "%m/%d/%Y") #Get the date from the new weight
+    old_date = datetime.strptime(older["weigh_day"], "%m/%d/%Y") #Get the date from the old weight
+
+    days = (new_date - old_date).days
+    # Prevent division by zero
+    if days == 0:
+        days = 1
+
+    gain_per_day = (new_weight - old_weight) / days
+
+ 
+
+
+    #Based on all data, define the health status for the cattle
+    if 0.5 <= gain_per_day <= 1.5:
+        return "healthy"
+
+    elif 0 <= gain_per_day < 0.5:
+        return "attention"
+
+    else:
+        return "critical"
+    
+
+def get_status_summary():
+
+    animals = search_all()
+
+    summary = {
+        "healthy": 0,
+        "attention": 0,
+        "critical": 0
+    }
+
+    for animal in animals:
+
+        status = animal["health_status"]
+
+        if status in summary:
+            summary[status] += 1
+
+    return summary
