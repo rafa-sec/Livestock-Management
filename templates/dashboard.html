@@ -30,11 +30,12 @@
 
         <div class="card" id="cardAnimalsRequiringAttention">
             <h2>Animals Requiring Attention</h2>
-            <p>{{ animals_requiring_attention }}</p>
+            <p>{{ attention_count }} Attfghfgention</p>
+            <p>{{ critical_count }} Critical</p>
             <ul id="animalsRequiringAttentionList" style="display: none;">
 
-                {% for id in animals_requiring_attention_id %}
-                    <li><p>{{ id }}</p></li>
+                {% for animal in attention_animals %}
+                    <li><p>{{ animal }}</p></li>
                 {% endfor %}
             </ul>
         </div>

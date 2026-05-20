@@ -247,3 +247,23 @@ def get_status_summary():
             summary[status] += 1
 
     return summary
+
+
+def get_attention_animals():
+    animals = search_all()
+
+    result = {
+        "attention": [],
+        "critical": []
+    }
+
+    for animal in animals:
+
+        status = animal["health_status"]
+
+        if status == "attention":
+            result["attention"].append(animal["tag"])
+        elif status == "critical":
+            result["critical"].append(animal["tag"])
+
+    return result

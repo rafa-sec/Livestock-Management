@@ -20,10 +20,11 @@ def home():
 def dashboard():
     date = get_todayDate()
     total_herd = database.get_animal_count()
-    animals_requiring_attention_id = database.get_status_summary()
+    status_summary = database.get_status_summary()
+    attention_animals = database.get_attention_animals()
     missing_health_updates = 2
     recent_alerts = 1
-    return render_template("dashboard.html", total_herd=total_herd, missing_health_updates=missing_health_updates, recent_alerts=recent_alerts, animals_requiring_attention_id=animals_requiring_attention_id, date=date)
+    return render_template("dashboard.html", total_herd=total_herd, attention_animals=attention_animals ,missing_health_updates=missing_health_updates, recent_alerts=recent_alerts, status_summary=status_summary, date=date)
 
 @app.route("/register", methods=["GET","POST"])
 def register():

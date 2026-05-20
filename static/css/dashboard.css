@@ -30,6 +30,7 @@
 }
 
 #cardAnimalsRequiringAttention:hover{
-    color: blue;
+    cursor: pointer;
+    color: rgb(150, 140, 0);
 }
 
