@@ -19,12 +19,30 @@ def home():
 @app.route('/dashboard')
 def dashboard():
     date = get_todayDate()
+
     total_herd = database.get_animal_count()
+
     status_summary = database.get_status_summary()
+
     attention_animals = database.get_attention_animals()
+
     missing_health_updates = 2
     recent_alerts = 1
-    return render_template("dashboard.html", total_herd=total_herd, attention_animals=attention_animals ,missing_health_updates=missing_health_updates, recent_alerts=recent_alerts, status_summary=status_summary, date=date)
+    return render_template("dashboard.html",
+                           date=date,
+
+                           total_herd=total_herd,
+
+                           attention_animals=attention_animals["attention"],
+                           critical_animals=attention_animals["critical"],
+
+                           attention_count=status_summary["attention"],
+                           critical_count=status_summary["critical"],
+
+
+                           missing_health_updates=missing_health_updates,
+                           recent_alerts=recent_alerts,
+                           )
 
 @app.route("/register", methods=["GET","POST"])
 def register():
@@ -47,6 +65,7 @@ def register():
 def animals():
     date = get_todayDate()
     animal_data = database.search_all()
+    status_filter = request.args.get("status")
 
     return render_template(
         "animals.html",
